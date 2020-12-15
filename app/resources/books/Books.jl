@@ -14,6 +14,7 @@ export Book
     has_ocr::Bool = false
     has_index::Bool = false
 end
+
 function seed()
     [
         Book(name="Intro to ED", author="Griff")

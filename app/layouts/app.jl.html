@@ -3,10 +3,22 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Books</title>
     <link rel="stylesheet" href="/css/tachyons.min.css">
 </head>
 
-<body> <%@yield%> </body>
+<body class="w-100 bg-dark-blue ph1 pb1 min-vh-100 flex flex-column justify-center">
+    <nav class="db dt-l w-100 border-box pa2">
+        <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+            <a class="link dim white f4 dib mr3 mr4-l" href="/" title="Home">Home</a>
+            <a class="link dim white f4 dib mr3 mr4-l" href="/help" title="Help">Help</a>
+            <a class="link dim white f4 dib mr3 mr4-l" href="https://github.com/IISERM/BooksApp"
+                title="Contribute">Contribute</a>
+            <a class="link dim white f4 dib mr3 mr4-l" href="#" title="Feedback">Feedback</a>
+        </div>
+    </nav>
+    <%@yield%>
+</body>
 
 </html>

@@ -1,19 +1,27 @@
-<article data-name="article-full-bleed-background w-100">
-  <div class="pa3 pa4-ns bg-white black-70 f3 times w-100">
-    <header class="bb b--black-70 pv4 tc">
-      <p class="f1 fw7 ttu tracked lh-title mt0 mb3 avenir tc">Bundles List</p>
-      <div>
-        <input placeholder="Search Query"
-          class="mw-100 w-100 w5-ns f5 input-reset ba b--black-20 pv1 ph3 border-box roboto">
-        <input type="button" value="Search"
-          class="input-reset w-100 w-auto-ns bg-black-80 white f5 pv1 ph2 ba b--black-80 bg-hover-mid-gray roboto">
-      </div>
-    </header>
-    <div class="pa4"> <% @foreach(bundles) do bundle %> <details
-        class="w-auto ma1 bg-black-10 b--black-30 pa2 ba bw1 br3 f4">
+<div class="pa3 pa4-ns bg-white black-70 f3 times w-100 self-stretch flex-grow-1">
+  <header class="bb b--black-70 pv4 tc">
+    <p class="f1 fw7 ttu tracked lh-title mt0 mb3 avenir tc">Bundles List</p>
+    <div>
+      <form action="" method="get">
+        <input name="q" placeholder="Search Query" value="$(query)"
+          class="mw-100 w-100 w5-ns f5 input-reset ba b--black-20 pv1 br-0 ph3 border-box roboto">
+        <a href="?"><span
+            class="w-100 w-auto-ns white f5 pv1 ba b--black-20 bl-0 pr2 roboto pointer dib mr1">❌</span></a>
+        <input type="submit" value="Search"
+          class="input-reset w-100 w-auto-ns bg-black-80 white f5 pv1 ph2 ba b--black-80 bg-hover-mid-gray roboto pointer">
+      </form>
+    </div>
+  </header>
+  <div class="pa4">
+    <% @foreach(bundles) do bundle %>
+      <details class="w-auto ma1 bg-black-10 b--black-30 pa2 ba bw1 br3 f4">
         <summary class="f4 ba b--transparent link"> $(bundle.name) </summary>
-        <div class="pa3"> Books: <ul class="ma1"><% @foreach(bundle.books) do bookid %> <li class="f4">$(bookid)</li>
-            <% end %> </ul> Type: $(bundle.type) </div>
-      </details> <% end %> </div>
+        <div class="pa3"> Books: <ul class="ma1">
+            <% @foreach(getBooks(bundle)) do bookid %>
+              <li class="f4">$(bookid)</li>
+              <% end %>
+          </ul> Type: $(getSeverity(bundle)) </div>
+      </details>
+      <% end %>
   </div>
-</article>
+</div>

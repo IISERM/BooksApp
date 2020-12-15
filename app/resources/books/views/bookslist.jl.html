@@ -1,17 +1,20 @@
-<article data-name="article-full-bleed-background">
-  <div class="fl pa3 pa4-ns bg-white black-70 f3 times">
-    <header class="bb b--black-70 pv4 tc">
-      <p class="f1 fw7 ttu tracked lh-title mt0 mb3 avenir tc">Books List</p>
-      <div>
-        <input placeholder="Search Query"
-          class="mw-100 w-100 w5-ns f5 input-reset ba b--black-20 pv1 ph3 border-box roboto">
-        <input type="button" value="Search"
-          class="input-reset w-100 w-auto-ns bg-black-80 white f5 pv1 ph2 ba b--black-80 bg-hover-mid-gray roboto">
-      </div>
-    </header>
-    <div class="pa4">
-      <div class="overflow-auto">
-        <table id="books" class="f6 w-100 mw8 center" cellspacing="0">
+<div class="pa4 bg-white black-70 f3 self-stretch flex-grow-1">
+  <header class="bb b--black-70 pv4 tc">
+    <p class="f1 fw7 ttu tracked lh-title mt0 mb3 avenir tc">Books List</p>
+    <div>
+      <form action="" method="get">
+        <input name="q" placeholder="Search Query"
+          class="mw-100 w-100 w5-ns f5 input-reset ba b--black-20 pv1 br-0 ph3 border-box roboto" value="$(query)">
+        <a href="?"><span
+            class="w-100 w-auto-ns white f5 pv1 ba b--black-20 bl-0 pr2 roboto pointer dib mr1">❌</span></a>
+        <input type="submit" value="Search"
+          class="input-reset w-100 w-auto-ns bg-black-80 white f5 pv1 ph2 ba b--black-80 bg-hover-mid-gray roboto pointer">
+      </form>
+    </div>
+  </header>
+  <div class="pa4">
+    <div class="overflow-auto">
+      <% if length(books)> 0%> <table id="books" class="f6 w-100 mw8 center" cellspacing="0">
           <thead>
             <tr class="stripe-dark">
               <th class="f3 fw6 tl pa3 bg-white">Title</th>
@@ -22,16 +25,25 @@
               <th class="f3 fw6 tl pa3 bg-white">Has Internal links</th>
             </tr>
           </thead>
-          <tbody class="lh-copy"> <% @foreach(books) do book %> <tr class="stripe-dark">
-              <td class="f5 fw5 pa3">$(book.name)</td>
-              <td class="f5 pa3">$(book.author |> titlecase)</td>
-              <td class="f5 pa3">$(book.description)</td>
-              <td class="f5 pa3">$(book.has_ocr ? "Yes" : "No")</td>
-              <td class="f5 pa3">$(book.has_index ? "Yes" : "No")</td>
-              <td class="f5 pa3">$(book.has_inlinks ? "Yes" : "No")</td>
-            </tr> <% end %> </tbody>
+          <tbody class="lh-copy">
+            <% @foreach(books) do book %>
+              <tr class="stripe-dark">
+                <td class="f5 fw5 pa3">$(book.name)</td>
+                <td class="f5 pa3">$(book.author |> titlecase)</td>
+                <td class="f5 pa3">$(book.description)</td>
+                <td class="f5 pa3">$(book.has_ocr ? "Yes" : "No")</td>
+                <td class="f5 pa3">$(book.has_index ? "Yes" : "No")</td>
+                <td class="f5 pa3">$(book.has_inlinks ? "Yes" : "No")</td>
+              </tr>
+              <% end %>
+          </tbody>
         </table>
-      </div>
+        <%else%>
+          <div class="tc">
+            <p class="ma0">No results Found!</p>
+            <p class="f5 ma0">Try searching with a more general Query</p>
+          </div>
+          <%end%>
     </div>
   </div>
-</article>
+</div>

@@ -1,22 +1,26 @@
 module BundlesController
-using Books
+using Bundles
 using Genie.Renderer.Html
+using SearchLight
 
-@enum BundleSeverity Mandatory Preferred Optional
-struct Bundle
-    name::String
-    books::Array{String}
-    type::BundleSeverity
-end
+searchQuery(query) = type ->
+    find(
+        type,
+        SQLWhereExpression(
+            "name LIKE ?", 
+            "%$(query)%"
+        )
+    )
 
-bundles = [
-    Bundle("Year 1", ["1", "2", "4"], Mandatory)
-    Bundle("Year 2", ["1", "4", "3"], Mandatory)
-    Bundle("Year 3", ["1", "2", "5"], Mandatory)
-]
 
-function bundleslist()
-    html(:bundles, :bundleslist, bundles=bundles)
+function bundleslist(queryString::Union{String,Nothing})
+    getBundles = isnothing(queryString) ? all : searchQuery(queryString)
+    html(
+        :bundles, :bundleslist, 
+        context=@__MODULE__,
+        bundles=getBundles(Bundle), 
+        query=isnothing(queryString) ? "" : queryString
+    )
 end
 
 end

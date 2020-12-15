@@ -1,7 +1,7 @@
-  cd(@__DIR__)
-  import Pkg
-  Pkg.activate(".")
+cd(@__DIR__)
+import Pkg
+Pkg.activate(".")
 
-  function main()
+function main()
     include(joinpath("src", "BooksApp.jl"))
-  end; main()
+end; main()

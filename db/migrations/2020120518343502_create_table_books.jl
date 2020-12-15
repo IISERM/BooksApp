@@ -22,3 +22,14 @@ function down()
 end
 
 end
+
+#=
+select * from tbl 
+where 
+  name LIKE "%$(query)%" OR 
+  author LIKE "%$(query)%" OR 
+  description LIKE "%$(query)%"
+
+  SELECT name+author+description as st1 where st1 like "%Physics%"
+  
+=#
