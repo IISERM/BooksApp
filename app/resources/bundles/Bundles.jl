@@ -13,9 +13,6 @@ mutable struct Bundle <: AbstractModel
     name::String
     books::String
     type::Int
-    function Bundle()
-        new(DbId(), "", "[]", 0)
-    end
     function Bundle(;name::String="", books::String="[]", type::Int=0)
         new(DbId(), name, books, type)
     end
